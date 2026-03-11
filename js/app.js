@@ -14,6 +14,38 @@ const menuToggle = document.getElementById("menuToggle")
 const searchInput = document.getElementById("searchInput")
 const themeToggle = document.getElementById("themeToggle")
 
+/* ===============================
+MOBILE NAVIGATION
+=============================== */
+
+const mobileButtons = document.querySelectorAll(".mobile-nav button[data-page]")
+
+mobileButtons.forEach(btn => {
+
+btn.addEventListener("click",()=>{
+
+const page = btn.getAttribute("data-page")
+
+loadPage(page)
+
+})
+
+})
+
+
+/* mobile theme */
+
+const mobileTheme = document.getElementById("mobileTheme")
+
+if(mobileTheme){
+
+mobileTheme.onclick = () => {
+document.body.classList.toggle("light")
+}
+
+}
+
+
 /* MOBILE SIDEBAR */
 
 const mobileSidebar = document.getElementById("mobileSidebar")
@@ -61,6 +93,8 @@ DEFAULT PAGE
 ===================================== */
 
 loadPage("dashboard")
+initThemeToggle()
+
 
 
 /* =====================================
@@ -79,6 +113,8 @@ navLinks.forEach(l => l.classList.remove("active"))
 link.classList.add("active")
 
 loadPage(page)
+initThemeToggle()
+
 
 })
 
@@ -145,6 +181,8 @@ e.preventDefault()
 const page = link.getAttribute("data-page")
 
 loadPage(page)
+initThemeToggle()
+
 
 mobileSidebar.classList.remove("active")
 mobileOverlay.classList.remove("active")
@@ -183,19 +221,17 @@ card.style.display="none"
 }
 
 
-/* =====================================
+/* ===============================
 THEME TOGGLE
-===================================== */
+=============================== */
 
-const savedTheme = localStorage.getItem("theme")
+function initThemeToggle(){
 
-if(savedTheme === "light"){
-document.body.classList.add("light")
-}
+const themeToggle = document.getElementById("themeToggle")
 
-themeToggle.addEventListener("click",toggleTheme)
+if(!themeToggle) return
 
-function toggleTheme(){
+themeToggle.onclick = () => {
 
 document.body.classList.toggle("light")
 
@@ -206,6 +242,18 @@ localStorage.setItem("theme","dark")
 }
 
 }
+
+}
+
+/* restore theme */
+
+const savedTheme = localStorage.getItem("theme")
+
+if(savedTheme === "light"){
+document.body.classList.add("light")
+}
+
+
 
 
 /* =====================================
@@ -322,3 +370,29 @@ update()
 })
 
 }
+
+/* ===============================
+SCROLL TO TOP
+=============================== */
+
+const scrollBtn = document.getElementById("scrollTop")
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY > 300){
+scrollBtn.style.display="block"
+}else{
+scrollBtn.style.display="none"
+}
+
+})
+
+scrollBtn.onclick = () => {
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+})
+
+}
+
