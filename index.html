@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -7,12 +6,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Chetankumar | DevOps Engineer</title>
+<title>Chetan Kumar | DevOps Engineer</title>
 
 <link rel="stylesheet" href="css/style.css">
 
-<!-- Lucide Icons -->
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
@@ -26,49 +27,48 @@
 <div class="sidebar-header">
 
 <button id="toggleSidebar">☰</button>
-
 <h2 class="logo">Chetan AI</h2>
 
 </div>
 
 <nav class="nav-menu">
 
-<a href="#dashboard">
+<a href="#" data-page="dashboard">
 <i data-lucide="home"></i>
 <span>Dashboard</span>
 </a>
 
-<a href="#about">
+<a href="#" data-page="about">
 <i data-lucide="user"></i>
 <span>About</span>
 </a>
 
-<a href="#services">
+<a href="#" data-page="services">
 <i data-lucide="settings"></i>
 <span>Services</span>
 </a>
 
-<a href="#projects">
+<a href="#" data-page="projects">
 <i data-lucide="folder"></i>
 <span>Projects</span>
 </a>
 
-<a href="#github">
+<a href="#" data-page="github">
 <i data-lucide="github"></i>
 <span>GitHub</span>
 </a>
 
-<a href="#vision">
+<a href="#" data-page="vision">
 <i data-lucide="rocket"></i>
 <span>Vision</span>
 </a>
 
-<a href="#connect">
+<a href="#" data-page="connect">
 <i data-lucide="link"></i>
 <span>Connect</span>
 </a>
 
-<a href="#contact">
+<a href="#" data-page="contact">
 <i data-lucide="mail"></i>
 <span>Contact</span>
 </a>
@@ -83,201 +83,31 @@
 
 </aside>
 
+
 <!-- MAIN CONTENT -->
 
 <main class="main">
 
-<!-- DASHBOARD -->
+<!-- SEARCH BAR -->
 
-<section id="dashboard">
+<div class="search-bar">
 
-<div class="hero">
-
-<h1>Chetan Kumar</h1>
-
-<p class="role">
-DevOps Engineer • AI Infrastructure Architect
-</p>
-
-<p class="intro">
-I design and deploy secure, scalable cloud-native systems powered by automation,
-DevOps best practices, and production-grade infrastructure.
-</p>
+<input
+type="text"
+id="searchInput"
+placeholder="Search projects, services, content..."
+>
 
 </div>
 
-<div class="stats">
+<!-- PAGE CONTENT LOADS HERE -->
 
-<div class="stat-card">
-<h3>15+</h3>
-<p>Projects Built</p>
-</div>
-
-<div class="stat-card">
-<h3>99.9%</h3>
-<p>Reliability Target</p>
-</div>
-
-<div class="stat-card">
-<h3>AWS</h3>
-<p>Cloud Infrastructure</p>
-</div>
-
-<div class="stat-card">
-<h3>AI Ready</h3>
-<p>Scalable Systems</p>
-</div>
+<div id="page-content">
 
 </div>
-
-</section>
-
-<!-- ABOUT -->
-
-<section id="about">
-
-<h2>About Me</h2>
-
-<p>
-I am a DevOps Engineer transitioning into an AI Infrastructure Founder.
-My focus is building scalable infrastructure using AWS, Docker, Terraform,
-and automated CI/CD pipelines.
-</p>
-
-</section>
-
-<!-- SERVICES -->
-
-<section id="services">
-
-<h2>Services</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>DevOps Automation</h3>
-<p>CI/CD pipelines, containerization, infrastructure automation.</p>
-</div>
-
-<div class="card">
-<h3>Cloud Architecture</h3>
-<p>AWS architecture design, VPC, high availability systems.</p>
-</div>
-
-<div class="card">
-<h3>Infrastructure as Code</h3>
-<p>Terraform-based infrastructure provisioning.</p>
-</div>
-
-<div class="card">
-<h3>AI Infrastructure</h3>
-<p>Systems ready for machine learning workloads.</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- PROJECTS -->
-
-<section id="projects">
-
-<h2>Projects</h2>
-
-<div id="repo-container" class="grid"></div>
-
-</section>
-
-<!-- GITHUB STATS -->
-
-<section id="github">
-
-<h2>GitHub Activity</h2>
-
-<div class="github-stats">
-
-<img
-src="https://github-readme-stats.vercel.app/api?username=CHETANKUMAR20&show_icons=true&theme=tokyonight"
-alt="GitHub stats"
-/>
-
-<img
-src="https://github-readme-streak-stats.herokuapp.com/?user=CHETANKUMAR20&theme=tokyonight"
-alt="GitHub streak"
-/>
-
-</div>
-
-</section>
-
-<!-- VISION -->
-
-<section id="vision">
-
-<h2>AI Infrastructure Vision</h2>
-
-<p>
-The future belongs to AI-native platforms.
-My mission is to build infrastructure systems enabling intelligent products
-to scale globally with reliability, automation, and security.
-</p>
-
-</section>
-
-<!-- CONNECT -->
-
-<section id="connect">
-
-<h2>Connect With Me</h2>
-
-<p class="connect-text">
-Explore my work and connect with me across platforms.
-</p>
-
-<div class="social-links">
-
-<a href="https://github.com/CHETANKUMAR20" target="_blank">
-<img src="https://cdn.simpleicons.org/github/white" alt="GitHub">
-</a>
-
-<a href="https://www.linkedin.com" target="_blank">
-<img src="https://cdn.simpleicons.org/linkedin/white" alt="LinkedIn">
-</a>
-
-<a href="https://twitter.com" target="_blank">
-<img src="https://cdn.simpleicons.org/x/white" alt="Twitter">
-</a>
-
-<a href="mailto:chetankumar.build@gmail.com">
-<img src="https://cdn.simpleicons.org/gmail/white" alt="Email">
-</a>
-
-<a href="https://chetankumar20.github.io" target="_blank">
-<img src="https://cdn.simpleicons.org/googlechrome/white" alt="Portfolio">
-</a>
-
-</div>
-
-</section>
-
-<!-- CONTACT -->
-
-<section id="contact">
-
-<h2>Contact</h2>
-
-<p>Email: chetankumar.build@gmail.com</p>
-
-<p>
-GitHub:
-<a href="https://github.com/CHETANKUMAR20" target="_blank">
-github.com/CHETANKUMAR20
-</a>
-</p>
-
-</section>
 
 </main>
+
 
 <script src="js/app.js"></script>
 

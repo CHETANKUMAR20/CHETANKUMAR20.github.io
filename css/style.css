@@ -1,282 +1,480 @@
+/* ===============================
+GLOBAL RESET
+=============================== */
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 }
 
-/* THEME VARIABLES */
-
-:root{
---bg:#020617;
---card:#0f172a;
---text:#ffffff;
---muted:#94a3b8;
---accent:#60a5fa;
-}
-
-body.light{
---bg:#ffffff;
---card:#f3f4f6;
---text:#111827;
---muted:#6b7280;
---accent:#2563eb;
-}
-
-/* BODY */
-
 body{
 font-family:Inter, Arial, sans-serif;
 background:var(--bg);
 color:var(--text);
 display:flex;
+transition:0.3s;
 }
 
-/* SIDEBAR */
+/* ===============================
+THEME VARIABLES
+=============================== */
+
+:root{
+
+--bg:#020617;
+--sidebar:#0f172a;
+--card:#111827;
+
+--text:#f9fafb;
+--muted:#9ca3af;
+
+--accent:#3b82f6;
+--border:rgba(255,255,255,0.06);
+
+}
+
+/* LIGHT MODE */
+
+body.light{
+
+--bg:#ffffff;
+--sidebar:#f3f4f6;
+--card:#ffffff;
+
+--text:#111827;
+--muted:#6b7280;
+
+--accent:#2563eb;
+--border:#e5e7eb;
+
+}
+
+/* ===============================
+SIDEBAR
+=============================== */
 
 .sidebar{
+
 width:240px;
 height:100vh;
-background:var(--card);
-padding:30px 20px;
+
+background:var(--sidebar);
+
 position:fixed;
 left:0;
 top:0;
-border-right:1px solid rgba(255,255,255,0.05);
+
 display:flex;
 flex-direction:column;
 justify-content:space-between;
+
+padding:30px 20px;
+
+border-right:1px solid var(--border);
+
 transition:0.3s;
+
 }
 
-/* SIDEBAR HEADER */
+/* sidebar header */
 
 .sidebar-header{
+
 display:flex;
 align-items:center;
 justify-content:space-between;
+
 margin-bottom:30px;
+
 }
 
 .logo{
+
 font-size:20px;
 font-weight:600;
+
 }
 
-/* NAVIGATION */
+/* navigation */
 
 .nav-menu{
+
 display:flex;
 flex-direction:column;
-gap:10px;
+gap:8px;
+
 }
 
-.sidebar a{
+.nav-menu a{
+
 display:flex;
 align-items:center;
 gap:12px;
-color:var(--muted);
+
 text-decoration:none;
-padding:10px;
+
+color:var(--muted);
+
+padding:10px 12px;
+
 border-radius:8px;
+
 transition:0.2s;
+
 }
 
-.sidebar a:hover{
-background:rgba(255,255,255,0.05);
+.nav-menu a:hover{
+
+background:var(--card);
 color:var(--text);
+
 }
 
 .sidebar i{
+
 width:18px;
 height:18px;
+
 }
 
-/* COLLAPSED SIDEBAR */
+/* collapsed sidebar */
 
 .sidebar.collapsed{
+
 width:70px;
+
 }
 
 .sidebar.collapsed span{
+
 display:none;
+
 }
 
 .sidebar.collapsed .logo{
+
 display:none;
+
 }
 
-/* SIDEBAR FOOTER */
+/* ===============================
+SIDEBAR FOOTER
+=============================== */
 
 .sidebar-footer{
-margin-top:30px;
+
+margin-top:20px;
+
 }
 
-/* BUTTONS */
+/* ===============================
+BUTTON
+=============================== */
 
 button{
+
 background:none;
 border:none;
+
 color:var(--text);
+
 cursor:pointer;
+
 font-size:18px;
+
 }
 
-/* MAIN CONTENT */
+/* ===============================
+MAIN CONTENT
+=============================== */
 
 .main{
+
 margin-left:260px;
+
 padding:60px;
-max-width:1100px;
+
 width:100%;
+max-width:1100px;
+
 transition:0.3s;
+
 }
 
 .sidebar.collapsed + .main{
+
 margin-left:90px;
+
 }
 
-/* HERO */
+/* ===============================
+SEARCH BAR
+=============================== */
+
+.search-bar{
+
+margin-bottom:40px;
+
+}
+
+.search-bar input{
+
+width:100%;
+
+padding:12px 14px;
+
+border-radius:8px;
+
+border:1px solid var(--border);
+
+background:var(--card);
+
+color:var(--text);
+
+font-size:14px;
+
+outline:none;
+
+}
+
+.search-bar input::placeholder{
+
+color:var(--muted);
+
+}
+
+/* ===============================
+HERO
+=============================== */
 
 .hero h1{
+
 font-size:40px;
+
 margin-bottom:10px;
+
 }
 
 .role{
+
 color:var(--accent);
+
 margin-bottom:20px;
+
 }
 
 .intro{
-max-width:650px;
+
 color:var(--muted);
+
+max-width:650px;
+
 margin-bottom:40px;
+
 }
 
-/* STATS */
+/* ===============================
+STATS
+=============================== */
 
 .stats{
+
 display:grid;
+
 grid-template-columns:repeat(4,1fr);
+
 gap:20px;
+
 margin-bottom:60px;
+
 }
 
 .stat-card{
+
 background:var(--card);
+
 padding:30px;
-border-radius:10px;
+
+border-radius:12px;
+
 text-align:center;
-transition:0.3s;
+
+border:1px solid var(--border);
+
+transition:0.25s;
+
 }
 
 .stat-card:hover{
+
 transform:translateY(-5px);
+
 }
 
-/* SECTIONS */
+/* ===============================
+SECTIONS
+=============================== */
 
 section{
+
 margin-bottom:80px;
+
 }
 
 h2{
+
 margin-bottom:20px;
+
 font-size:26px;
+
 }
 
-/* GRID */
+/* ===============================
+GRID
+=============================== */
 
 .grid{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
 gap:20px;
+
 }
 
-/* SERVICE CARDS */
+/* ===============================
+CARDS
+=============================== */
 
 .card{
+
 background:var(--card);
-padding:25px;
-border-radius:10px;
-transition:0.3s;
+
+padding:24px;
+
+border-radius:12px;
+
+border:1px solid var(--border);
+
+transition:0.25s;
+
 }
 
 .card:hover{
+
 transform:translateY(-5px);
+
 }
 
-/* PROJECT GRID */
+/* ===============================
+PROJECT META
+=============================== */
 
-.project-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
+.repo-meta{
+
+display:flex;
+
+gap:15px;
+
+margin:12px 0;
+
+font-size:13px;
+
+color:var(--muted);
+
 }
 
-/* GITHUB STATS */
+/* ===============================
+GITHUB STATS
+=============================== */
 
 .github-stats{
+
 display:flex;
+
 gap:30px;
+
 flex-wrap:wrap;
+
 align-items:center;
+
 }
 
 .github-stats img{
+
 width:420px;
+
 max-width:100%;
+
 border-radius:10px;
+
 }
 
-/* SOCIAL LINKS */
+/* ===============================
+SOCIAL LINKS
+=============================== */
 
 .social-links{
+
 display:flex;
+
 gap:25px;
+
 margin-top:20px;
+
 }
 
 .social-links img{
+
 width:28px;
 height:28px;
+
 opacity:0.8;
+
 transition:0.2s;
+
 }
 
 .social-links img:hover{
+
 opacity:1;
 transform:scale(1.15);
+
 }
 
 .connect-text{
+
 color:var(--muted);
+
 margin-bottom:15px;
+
 }
 
-/* MOBILE */
+/* ===============================
+MOBILE
+=============================== */
 
 @media(max-width:900px){
 
 .sidebar{
+
 display:none;
+
 }
 
 .main{
+
 margin-left:0;
 padding:30px;
+
 }
 
 .stats{
+
 grid-template-columns:repeat(2,1fr);
-}
 
 }
 
-.repo-meta{
-display:flex;
-gap:15px;
-font-size:13px;
-margin:10px 0;
-color:#94a3b8;
 }

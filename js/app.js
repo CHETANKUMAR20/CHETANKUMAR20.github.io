@@ -1,35 +1,122 @@
-/* ------------------------------
+/* ===============================
+PAGE LOADER
+=============================== */
+
+const pageContainer = document.getElementById("page-content");
+const navLinks = document.querySelectorAll(".nav-menu a");
+
+async function loadPage(page){
+
+try{
+
+const res = await fetch(`pages/${page}.html`);
+const html = await res.text();
+
+pageContainer.innerHTML = html;
+
+/* reload lucide icons */
+
+if(window.lucide){
+lucide.createIcons();
+}
+
+/* reload github repos if needed */
+
+if(page === "projects"){
+loadRepos();
+}
+
+}catch(err){
+
+pageContainer.innerHTML = "<p>Unable to load page.</p>";
+
+}
+
+}
+
+/* default page */
+
+loadPage("dashboard");
+
+/* navigation click */
+
+navLinks.forEach(link => {
+
+link.addEventListener("click",(e)=>{
+
+e.preventDefault();
+
+const page = link.getAttribute("data-page");
+
+loadPage(page);
+
+});
+
+});
+
+
+/* ===============================
+SEARCH FUNCTION
+=============================== */
+
+const searchInput = document.getElementById("searchInput");
+
+if(searchInput){
+
+searchInput.addEventListener("input",()=>{
+
+const term = searchInput.value.toLowerCase();
+
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+
+const text = card.innerText.toLowerCase();
+
+if(text.includes(term)){
+card.style.display="block";
+}else{
+card.style.display="none";
+}
+
+});
+
+});
+
+}
+
+
+/* ===============================
 GITHUB REPOSITORIES LOADER
------------------------------- */
+=============================== */
+
+async function loadRepos(){
 
 const container = document.getElementById("repo-container");
 
-async function loadRepos() {
-
 if(!container) return;
 
-container.innerHTML = "<p>Loading repositories...</p>";
+container.innerHTML="Loading repositories...";
 
-try {
+try{
 
 const res = await fetch("https://api.github.com/users/CHETANKUMAR20/repos");
 
 const data = await res.json();
 
-/* filter + sort */
-
 const repos = data
 .filter(repo => !repo.fork)
 .sort((a,b)=> b.stargazers_count - a.stargazers_count);
 
-container.innerHTML = "";
+container.innerHTML="";
 
-repos.forEach(repo => {
+repos.forEach(repo=>{
 
-const card = document.createElement("div");
-card.className = "card";
+const card=document.createElement("div");
 
-card.innerHTML = `
+card.className="card";
+
+card.innerHTML=`
 
 <h3>${repo.name}</h3>
 
@@ -38,7 +125,6 @@ card.innerHTML = `
 <div class="repo-meta">
 
 <span>${repo.language || "Code"}</span>
-
 <span>⭐ ${repo.stargazers_count}</span>
 
 </div>
@@ -46,32 +132,32 @@ card.innerHTML = `
 <a href="${repo.html_url}" target="_blank">
 View Repository →
 </a>
+
 `;
 
 container.appendChild(card);
 
 });
 
-} catch(err){
+}catch(err){
 
-container.innerHTML = "Unable to load repositories.";
-
-}
+container.innerHTML="Unable to load repositories.";
 
 }
 
-loadRepos();
+}
 
-/* ------------------------------
+
+/* ===============================
 SIDEBAR TOGGLE
------------------------------- */
+=============================== */
 
-const toggle = document.getElementById("toggleSidebar");
-const sidebar = document.querySelector(".sidebar");
+const toggleSidebar=document.getElementById("toggleSidebar");
+const sidebar=document.querySelector(".sidebar");
 
-if(toggle && sidebar){
+if(toggleSidebar){
 
-toggle.addEventListener("click", () => {
+toggleSidebar.addEventListener("click",()=>{
 
 sidebar.classList.toggle("collapsed");
 
@@ -79,46 +165,42 @@ sidebar.classList.toggle("collapsed");
 
 }
 
-/* ------------------------------
-THEME TOGGLE (REMEMBER USER)
------------------------------- */
 
-const themeToggle = document.getElementById("themeToggle");
+/* ===============================
+THEME TOGGLE
+=============================== */
+
+const themeToggle=document.getElementById("themeToggle");
 
 /* load saved theme */
 
-if(localStorage.getItem("theme") === "light"){
+const savedTheme=localStorage.getItem("theme");
 
+if(savedTheme==="light"){
 document.body.classList.add("light");
-
 }
 
 if(themeToggle){
 
-themeToggle.addEventListener("click", () => {
+themeToggle.addEventListener("click",()=>{
 
 document.body.classList.toggle("light");
 
 if(document.body.classList.contains("light")){
-
 localStorage.setItem("theme","light");
-
 }else{
-
 localStorage.setItem("theme","dark");
-
 }
 
 });
 
 }
 
-/* ------------------------------
-INIT ICONS
------------------------------- */
+
+/* ===============================
+ICON INIT
+=============================== */
 
 if(window.lucide){
-
 lucide.createIcons();
-
 }
