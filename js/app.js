@@ -20,3 +20,18 @@ container.appendChild(card);
 });
 
 });
+
+lucide.createIcons();
+
+const toggle = document.getElementById("toggleSidebar");
+const sidebar = document.querySelector(".sidebar");
+
+toggle.onclick = () => {
+sidebar.classList.toggle("collapsed");
+};
+
+const themeToggle = document.getElementById("themeToggle");
+
+themeToggle.onclick = () => {
+document.body.classList.toggle("light");
+};
