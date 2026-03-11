@@ -602,3 +602,125 @@ border-radius:6px;
 font-size:12px;
 
 }
+
+
+/* ===============================
+MOBILE SIDEBAR
+=============================== */
+
+.mobile-sidebar{
+
+position:fixed;
+
+top:0;
+left:-260px;
+
+width:260px;
+height:100vh;
+
+background:#020617;
+
+z-index:2000;
+
+padding:20px;
+
+transition:.3s;
+
+border-right:1px solid rgba(255,255,255,.05);
+
+}
+
+.mobile-sidebar.active{
+left:0;
+}
+
+/* overlay */
+
+.mobile-overlay{
+
+position:fixed;
+
+top:0;
+left:0;
+right:0;
+bottom:0;
+
+background:rgba(0,0,0,.6);
+
+z-index:1500;
+
+display:none;
+
+}
+
+.mobile-overlay.active{
+display:block;
+}
+
+/* header */
+
+.mobile-header{
+
+display:flex;
+
+align-items:center;
+gap:15px;
+
+margin-bottom:30px;
+
+}
+
+.mobile-header button{
+
+background:none;
+border:none;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+/* nav */
+
+.mobile-nav-menu{
+
+display:flex;
+flex-direction:column;
+
+gap:18px;
+
+}
+
+.mobile-nav-menu a{
+
+display:flex;
+align-items:center;
+
+gap:14px;
+
+color:#94a3b8;
+
+text-decoration:none;
+
+font-size:15px;
+
+}
+
+.mobile-nav-menu a:hover{
+color:white;
+}
+
+/* hide on desktop */
+
+@media(min-width:900px){
+
+.mobile-sidebar{
+display:none;
+}
+
+.mobile-overlay{
+display:none;
+}
+
+}

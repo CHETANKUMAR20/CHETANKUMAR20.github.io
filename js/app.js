@@ -1,10 +1,11 @@
 /* =====================================
-INITIALIZE AFTER PAGE LOAD
+PORTFOLIO APP CONTROLLER
 ===================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
 const pageContainer = document.getElementById("page-content")
+
 const navLinks = document.querySelectorAll(".nav a")
 
 const sidebar = document.getElementById("sidebar")
@@ -12,40 +13,16 @@ const menuToggle = document.getElementById("menuToggle")
 
 const searchInput = document.getElementById("searchInput")
 const themeToggle = document.getElementById("themeToggle")
-/* MOBILE NAVIGATION */
 
-const mobileLinks = document.querySelectorAll(".mobile-nav a[data-page]")
+/* MOBILE SIDEBAR */
 
-mobileLinks.forEach(link => {
-
-link.addEventListener("click",(e)=>{
-
-e.preventDefault()
-
-const page = link.getAttribute("data-page")
-
-loadPage(page)
-
-})
-
-})
-
-const mobileTheme = document.getElementById("mobileTheme")
-
-if(mobileTheme){
-
-mobileTheme.addEventListener("click",()=>{
-
-document.body.classList.toggle("light")
-
-})
-
-}
-
-
+const mobileSidebar = document.getElementById("mobileSidebar")
+const mobileOverlay = document.getElementById("mobileOverlay")
+const closeMobile = document.getElementById("closeMobile")
+const mobileLinks = document.querySelectorAll(".mobile-nav-menu a")
 
 /* =====================================
-LOAD PAGE FUNCTION
+PAGE LOADER
 ===================================== */
 
 async function loadPage(page){
@@ -57,15 +34,19 @@ const html = await res.text()
 
 pageContainer.innerHTML = html
 
-/* refresh icons */
+/* reload icons */
+
 if(window.lucide){
 lucide.createIcons()
 }
 
-/* load github repos */
+/* special page scripts */
+
 if(page === "projects"){
 loadRepos()
 }
+
+animateCounters()
 
 }catch(err){
 
@@ -75,7 +56,6 @@ pageContainer.innerHTML = "<p>Unable to load page.</p>"
 
 }
 
-
 /* =====================================
 DEFAULT PAGE
 ===================================== */
@@ -84,7 +64,7 @@ loadPage("dashboard")
 
 
 /* =====================================
-NAVIGATION SYSTEM
+DESKTOP NAVIGATION
 ===================================== */
 
 navLinks.forEach(link => {
@@ -95,37 +75,87 @@ e.preventDefault()
 
 const page = link.getAttribute("data-page")
 
-/* active nav */
-
 navLinks.forEach(l => l.classList.remove("active"))
 link.classList.add("active")
 
 loadPage(page)
 
-/* close sidebar on mobile */
-
-if(window.innerWidth < 900){
-sidebar.classList.remove("expanded")
-}
-
 })
 
 })
 
 
 /* =====================================
-SIDEBAR TOGGLE
+SIDEBAR TOGGLE (DESKTOP)
 ===================================== */
 
 menuToggle.addEventListener("click",()=>{
 
+if(window.innerWidth < 900){
+
+mobileSidebar.classList.add("active")
+mobileOverlay.classList.add("active")
+
+}else{
+
 sidebar.classList.toggle("expanded")
+
+}
 
 })
 
 
 /* =====================================
-SEARCH FUNCTION
+MOBILE SIDEBAR CLOSE
+===================================== */
+
+if(closeMobile){
+
+closeMobile.addEventListener("click",()=>{
+
+mobileSidebar.classList.remove("active")
+mobileOverlay.classList.remove("active")
+
+})
+
+}
+
+if(mobileOverlay){
+
+mobileOverlay.addEventListener("click",()=>{
+
+mobileSidebar.classList.remove("active")
+mobileOverlay.classList.remove("active")
+
+})
+
+}
+
+
+/* =====================================
+MOBILE NAVIGATION
+===================================== */
+
+mobileLinks.forEach(link => {
+
+link.addEventListener("click",(e)=>{
+
+e.preventDefault()
+
+const page = link.getAttribute("data-page")
+
+loadPage(page)
+
+mobileSidebar.classList.remove("active")
+mobileOverlay.classList.remove("active")
+
+})
+
+})
+
+
+/* =====================================
+SEARCH SYSTEM
 ===================================== */
 
 if(searchInput){
@@ -136,7 +166,7 @@ const term = searchInput.value.toLowerCase()
 
 const cards = document.querySelectorAll(".card")
 
-cards.forEach(card=>{
+cards.forEach(card => {
 
 const text = card.innerText.toLowerCase()
 
@@ -163,7 +193,9 @@ if(savedTheme === "light"){
 document.body.classList.add("light")
 }
 
-themeToggle.addEventListener("click",()=>{
+themeToggle.addEventListener("click",toggleTheme)
+
+function toggleTheme(){
 
 document.body.classList.toggle("light")
 
@@ -173,11 +205,11 @@ localStorage.setItem("theme","light")
 localStorage.setItem("theme","dark")
 }
 
-})
+}
 
 
 /* =====================================
-ICON INIT
+INIT ICONS
 ===================================== */
 
 if(window.lucide){
@@ -205,8 +237,6 @@ const res = await fetch("https://api.github.com/users/CHETANKUMAR20/repos")
 
 const data = await res.json()
 
-/* sort repos by stars */
-
 const repos = data
 .filter(repo => !repo.fork)
 .sort((a,b)=> b.stargazers_count - a.stargazers_count)
@@ -216,7 +246,6 @@ container.innerHTML = ""
 repos.slice(0,8).forEach(repo => {
 
 const card = document.createElement("div")
-
 card.className = "card"
 
 card.innerHTML = `
@@ -241,7 +270,6 @@ View Repository →
 
 `
 
-
 container.appendChild(card)
 
 })
@@ -254,6 +282,10 @@ container.innerHTML = "Unable to load repositories."
 
 }
 
+
+/* =====================================
+ANIMATED COUNTERS
+===================================== */
 
 function animateCounters(){
 
@@ -272,10 +304,15 @@ function update(){
 count += speed
 
 if(count < target){
+
 counter.innerText = Math.floor(count)
+
 requestAnimationFrame(update)
+
 }else{
+
 counter.innerText = target
+
 }
 
 }
@@ -285,7 +322,3 @@ update()
 })
 
 }
-
-setTimeout(animateCounters,500)
-
-
