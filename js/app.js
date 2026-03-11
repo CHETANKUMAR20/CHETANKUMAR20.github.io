@@ -152,18 +152,22 @@ container.innerHTML="Unable to load repositories.";
 SIDEBAR TOGGLE
 =============================== */
 
-const toggleSidebar=document.getElementById("toggleSidebar");
-const sidebar=document.querySelector(".sidebar");
+const toggleBtn = document.getElementById("toggleSidebar");
+const sidebar = document.querySelector(".sidebar");
 
-if(toggleSidebar){
+toggleBtn.addEventListener("click", () => {
 
-toggleSidebar.addEventListener("click",()=>{
+if (window.innerWidth <= 900) {
+
+sidebar.classList.toggle("mobile-open");
+
+} else {
 
 sidebar.classList.toggle("collapsed");
 
-});
-
 }
+
+});
 
 
 /* ===============================
@@ -204,3 +208,15 @@ ICON INIT
 if(window.lucide){
 lucide.createIcons();
 }
+
+const sidebarToggle = document.getElementById("toggleSidebar");
+
+sidebarToggle.addEventListener("click", () => {
+
+if(window.innerWidth < 900){
+sidebar.classList.toggle("open");
+}else{
+sidebar.classList.toggle("collapsed");
+}
+
+});
