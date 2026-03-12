@@ -1,3 +1,5 @@
+let githubProjects = []
+
 document.addEventListener("DOMContentLoaded", () => {
 
 /* =========================
@@ -83,9 +85,21 @@ printOutput("DevOps")
 break
 
 case "projects":
-printOutput("Wallpaper Hub")
-printOutput("Portfolio System")
-printOutput("AI Resume Analyzer")
+
+if(githubProjects.length === 0){
+
+printOutput("Loading projects from GitHub...")
+
+}else{
+
+githubProjects.slice(0,6).forEach(repo => {
+
+printOutput(repo.name)
+
+})
+
+}
+
 break
 
 case "contact":
@@ -139,6 +153,7 @@ const repos = await response.json()
 console.log("Total repos:", repos.length)
 
 const myProjects = repos.filter(repo => !repo.fork)
+githubProjects = myProjects
 
 console.log("My projects:", myProjects.length)
 
