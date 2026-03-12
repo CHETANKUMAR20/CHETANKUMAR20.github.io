@@ -103,6 +103,16 @@ printOutput("Command not found. Type 'help'")
 }
 
 
+
+// GitHub language colors
+const languageColors = {
+JavaScript:"#f1e05a",
+Python:"#3572A5",
+HTML:"#e34c26",
+CSS:"#563d7c",
+Shell:"#89e051",
+HCL:"#844FBA"
+}
 /* =========================
 GITHUB PROJECTS
 ========================= */
@@ -141,13 +151,22 @@ const card = document.createElement("div")
 card.className = "project-card"
 
 card.innerHTML = `
+<div class="project-preview">
+<img src="https://opengraph.githubassets.com/1/${repo.full_name}"
+alt="${repo.name}">
+</div>
+
 <h3>${repo.name}</h3>
+
 <p>${repo.description || "No description available"}</p>
 
 <div class="repo-meta">
 <span>⭐ ${repo.stargazers_count}</span>
 <span>🍴 ${repo.forks_count}</span>
-<span>${repo.language || "Code"}</span>
+<span class="language">
+<span class="lang-dot" style="background:${languageColors[repo.language] || "#999"}"></span>
+${repo.language || "Code"}
+</span>
 </div>
 
 <a href="${repo.html_url}" target="_blank">
@@ -365,3 +384,59 @@ entry.target.classList.add("active")
 reveals.forEach(el=>observer.observe(el))
 
 })
+
+
+async function loadGithubActivity(){
+
+const container = document.getElementById("activity-container")
+
+if(!container) return
+
+try{
+
+const response = await fetch(
+"https://api.github.com/users/CHETANKUMAR20/events/public"
+)
+
+const events = await response.json()
+
+container.innerHTML = ""
+
+const seenRepos = new Set()
+
+events.forEach(event => {
+
+if(seenRepos.has(event.repo.name)) return
+
+seenRepos.add(event.repo.name)
+
+const repo = event.repo.name
+const type = event.type
+const date = new Date(event.created_at).toLocaleDateString()
+
+const card = document.createElement("div")
+
+card.className = "activity-card"
+
+card.innerHTML = `
+<strong>${type}</strong> in 
+<span>${repo}</span>
+<br>
+<small>${date}</small>
+`
+
+container.appendChild(card)
+
+})
+
+}catch(error){
+
+console.error("Activity load error:", error)
+
+container.innerHTML = "Unable to load activity."
+
+}
+
+}
+
+window.addEventListener("load", loadGithubActivity)
