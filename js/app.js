@@ -124,7 +124,7 @@ const repos = await response.json()
 container.innerHTML = ""
 
 repos
-.filter(repo => !repo.fork)
+.filter(repo => !repo.fork)   // remove forked repos
 .slice(0,6)
 .forEach(repo => {
 
@@ -142,11 +142,11 @@ container.appendChild(card)
 
 })
 
-}catch(err){
+}catch(error){
 
-container.innerHTML = "Failed to load projects."
+console.error("GitHub API error:", error)
 
-console.error("GitHub API error:", err)
+container.innerHTML = "Unable to load projects."
 
 }
 
