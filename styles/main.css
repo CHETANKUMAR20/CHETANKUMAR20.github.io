@@ -433,3 +433,12 @@ color:#38bdf8;
 background:#0f172a;
 
 }
+
+img{
+max-width:100%;
+height:auto;
+}
+
+.terminal-window{
+overflow-x:auto;
+}

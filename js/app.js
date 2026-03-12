@@ -249,3 +249,13 @@ palette.style.display = "none"
 }
 
 })
+
+/* Mobile Menu JS*/
+const menuToggle = document.getElementById("menuToggle")
+const navLinks = document.getElementById("navLinks")
+
+menuToggle.addEventListener("click", () => {
+
+navLinks.classList.toggle("active")
+
+})

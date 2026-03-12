@@ -1,0 +1,83 @@
+
+/* Tablet Styles */
+@media (max-width: 1024px){
+
+.hero h1{
+font-size:48px;
+}
+
+.projects-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.photo-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* Mobile Styles */
+@media (max-width:768px){
+
+.navbar{
+padding:15px 20px;
+}
+
+.menu-toggle{
+display:block;
+font-size:24px;
+color:white;
+cursor:pointer;
+}
+
+.nav-links{
+
+position:absolute;
+top:60px;
+left:0;
+
+width:100%;
+
+background:#020617;
+
+flex-direction:column;
+
+display:none;
+
+padding:20px;
+
+}
+
+.nav-links.active{
+display:flex;
+}
+
+.nav-links li{
+margin-bottom:15px;
+}
+
+.hero h1{
+font-size:36px;
+}
+
+.subtitle{
+font-size:16px;
+}
+
+.projects-grid{
+grid-template-columns:1fr;
+}
+
+.photo-grid{
+grid-template-columns:1fr;
+}
+
+.devops-grid{
+grid-template-columns:1fr;
+}
+
+#command-palette{
+width:90%;
+}
+
+}
