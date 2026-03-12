@@ -518,3 +518,44 @@ console.error("DevOps status error", err)
 }
 
 window.addEventListener("load", loadDevOpsStatus)
+
+async function loadSystemStatus(){
+
+// Check GitHub API
+try{
+
+const res = await fetch(
+"https://api.github.com/users/CHETANKUMAR20"
+)
+
+if(res.ok){
+
+document.getElementById("api-status").textContent = "Online"
+document.getElementById("api-status").classList.add("status-ok")
+
+document.getElementById("github-sync").textContent = "Active"
+document.getElementById("github-sync").classList.add("status-ok")
+
+}else{
+
+throw new Error("API issue")
+
+}
+
+}catch{
+
+document.getElementById("api-status").textContent = "Offline"
+document.getElementById("api-status").classList.add("status-error")
+
+document.getElementById("github-sync").textContent = "Failed"
+document.getElementById("github-sync").classList.add("status-error")
+
+}
+
+// Deployment always active if site loaded
+document.getElementById("deploy-status").textContent = "Success"
+document.getElementById("deploy-status").classList.add("status-ok")
+
+}
+
+window.addEventListener("load", loadSystemStatus)
