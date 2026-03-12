@@ -4,21 +4,18 @@ document.addEventListener("DOMContentLoaded", () => {
 BOOT SCREEN
 ========================= */
 
-setTimeout(() => {
 
-const boot = document.getElementById("boot-screen")
+window.addEventListener("load", () => {
 
-boot.style.opacity = "0"
+setTimeout(()=>{
 
-setTimeout(() => {
-boot.style.display = "none"
-},800)
+document.getElementById("boot-screen").style.display="none"
 
 document.getElementById("portfolio").classList.remove("hidden")
 
-document.body.style.overflow = "auto"
+},4500)
 
-},5000)
+})
 
 
 /* =========================
@@ -112,23 +109,30 @@ GITHUB PROJECTS
 
 async function loadGithubProjects(){
 
+const container = document.getElementById("projects-container")
+
+if(!container) return
+
 try{
 
-const container=document.getElementById("projects-container")
+const response = await fetch(
+"https://api.github.com/users/CHETANKUMAR20/repos?sort=updated"
+)
 
-const response=await fetch("https://api.github.com/users/CHETANKUMAR20/repos")
+const repos = await response.json()
 
-const repos=await response.json()
+container.innerHTML = ""
 
-container.innerHTML=""
+repos
+.filter(repo => !repo.fork)
+.slice(0,6)
+.forEach(repo => {
 
-repos.slice(0,6).forEach(repo=>{
+const card = document.createElement("div")
 
-const card=document.createElement("div")
+card.className = "project-card reveal"
 
-card.className="project-card reveal"
-
-card.innerHTML=`
+card.innerHTML = `
 <h3>${repo.name}</h3>
 <p>${repo.description || "No description available"}</p>
 <a href="${repo.html_url}" target="_blank">View Repository</a>
@@ -138,15 +142,17 @@ container.appendChild(card)
 
 })
 
-}catch(error){
+}catch(err){
 
-console.error("GitHub API error:",error)
+container.innerHTML = "Failed to load projects."
+
+console.error("GitHub API error:", err)
 
 }
 
 }
 
-loadGithubProjects()
+document.addEventListener("DOMContentLoaded", loadGithubProjects)
 
 
 /* =========================
