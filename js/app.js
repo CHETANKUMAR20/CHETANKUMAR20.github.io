@@ -107,30 +107,32 @@ printOutput("Command not found. Type 'help'")
 GITHUB PROJECTS
 ========================= */
 
-async function loadGithubProjects(){
+async function loadGithubProjects() {
 
 const container = document.getElementById("projects-container")
 
-if(!container) return
+if (!container) {
+console.error("projects-container not found")
+return
+}
 
-try{
+try {
 
-const response = await fetch(
-"https://api.github.com/users/CHETANKUMAR20/repos?sort=updated"
-)
+const response = await fetch("https://api.github.com/users/CHETANKUMAR20/repos")
 
 const repos = await response.json()
 
-container.innerHTML = ""
+console.log("Repos:", repos)
 
-repos
-.filter(repo => !repo.fork)   // remove forked repos
-.slice(0,6)
-.forEach(repo => {
+const myProjects = repos.filter(repo => repo.fork === false)
+
+container.innerHTML = "TEST SUCCESS"
+
+myProjects.slice(0,6).forEach(repo => {
 
 const card = document.createElement("div")
 
-card.className = "project-card reveal"
+card.className = "project-card"
 
 card.innerHTML = `
 <h3>${repo.name}</h3>
@@ -142,17 +144,17 @@ container.appendChild(card)
 
 })
 
-}catch(error){
+} catch (error) {
 
-console.error("GitHub API error:", error)
+console.error("GitHub fetch failed:", error)
 
-container.innerHTML = "Unable to load projects."
-
-}
+container.innerHTML = "Failed to load projects."
 
 }
 
-document.addEventListener("DOMContentLoaded", loadGithubProjects)
+}
+
+window.addEventListener("load", loadGithubProjects)
 
 
 /* =========================
