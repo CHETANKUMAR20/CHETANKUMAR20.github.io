@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ChetanKumar | Portfolio</title>
+<title>Chetan Kumar | Portfolio</title>
 
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
@@ -17,6 +17,22 @@
 
 <body>
 
+<!-- Boot Screen -->
+<div id="boot-screen">
+<div class="terminal">
+
+<p>ChetanOS v1.0 initializing...</p>
+
+<p class="line">[✓] Loading UI modules</p>
+<p class="line">[✓] Starting DevOps engine</p>
+<p class="line">[✓] Connecting creative systems</p>
+<p class="line">[✓] Launching portfolio</p>
+
+</div>
+</div>
+
+
+<!-- NAVBAR -->
 <nav class="navbar">
 
 <div class="logo">Chetan Kumar</div>
@@ -37,40 +53,32 @@
 
 </nav>
 
-<!-- Boot Screen -->
-<div id="boot-screen">
 
-<div class="terminal">
-
-<p>ChetanOS v1.0 initializing...</p>
-
-<p class="line">[✓] Loading UI modules</p>
-<p class="line">[✓] Starting DevOps engine</p>
-<p class="line">[✓] Connecting creative systems</p>
-<p class="line">[✓] Launching portfolio</p>
-
-</div>
-
-</div>
-
-<!-- Main Portfolio -->
+<!-- MAIN PORTFOLIO -->
 <div id="portfolio" class="hidden">
-   
 
+
+<!-- HERO -->
 <section id="home" class="hero">
 
- <div id="particles-js"></div> 
+<div id="particles-js"></div>
 
-<h1>ChetanKumar</h1>
+<div class="hero-content">
+
+<h1>Chetan Kumar</h1>
 
 <p class="subtitle">
 UI/UX Designer • DevOps Learner • Photographer
 </p>
 
-<a class="btn" href="#">View Projects</a>
+<a class="btn" href="#projects">View Projects</a>
+
+</div>
 
 </section>
 
+
+<!-- TERMINAL -->
 <section id="terminal" class="terminal-section">
 
 <h2>Developer Console</h2>
@@ -81,14 +89,16 @@ UI/UX Designer • DevOps Learner • Photographer
 
 <div class="terminal-input-line">
 <span>visitor@chetan:~$</span>
-<input type="text" id="terminal-input" autofocus />
+<input type="text" id="terminal-input" autocomplete="off">
 </div>
 
 </div>
 
 </section>
 
-<section id="projects" class="projects-section">
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section reveal">
 
 <h2>Projects</h2>
 
@@ -100,7 +110,9 @@ UI/UX Designer • DevOps Learner • Photographer
 
 </section>
 
-<section id="devops" class="devops-section">
+
+<!-- DEVOPS -->
+<section id="devops" class="devops-section reveal">
 
 <h2>DevOps Dashboard</h2>
 
@@ -130,24 +142,28 @@ UI/UX Designer • DevOps Learner • Photographer
 
 </section>
 
-<section id="photography" class="photo-section">
+
+<!-- PHOTOGRAPHY -->
+<section id="photography" class="photo-section reveal">
 
 <h2>Photography</h2>
 
 <div class="photo-grid">
 
-<img src="assets/photography/photo1.jpg" alt="photo">
-<img src="assets/photography/photo2.jpg" alt="photo">
-<img src="assets/photography/photo3.jpg" alt="photo">
-<img src="assets/photography/photo4.jpg" alt="photo">
-<img src="assets/photography/photo5.jpg" alt="photo">
-<img src="assets/photography/photo6.jpg" alt="photo">
+<img src="assets/photography/photo1.jpg" alt="Photography work">
+<img src="assets/photography/photo2.jpg" alt="Photography work">
+<img src="assets/photography/photo3.jpg" alt="Photography work">
+<img src="assets/photography/photo4.jpg" alt="Photography work">
+<img src="assets/photography/photo5.jpg" alt="Photography work">
+<img src="assets/photography/photo6.jpg" alt="Photography work">
 
 </div>
 
 </section>
 
-<section id="contact" class="contact-section">
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section reveal">
 
 <h2>Contact</h2>
 
@@ -169,19 +185,23 @@ Interested in working together or discussing projects? Feel free to reach out.
 
 </section>
 
+
+<!-- FOOTER -->
 <footer class="footer">
-
 <p>© 2026 Chetan Kumar. Built with HTML, CSS and JavaScript.</p>
-
 </footer>
 
+
+<!-- LIGHTBOX -->
 <div id="lightbox">
 <img id="lightbox-img">
 </div>
 
+
 </div>
 
 
+<!-- COMMAND PALETTE -->
 <div id="command-palette">
 
 <input
@@ -203,8 +223,8 @@ placeholder="Type a command..."
 
 </div>
 
-<script src="js/app.js"></script>
 
+<script src="js/app.js"></script>
 
 </body>
 </html>

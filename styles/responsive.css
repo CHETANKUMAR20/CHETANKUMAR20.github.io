@@ -1,6 +1,17 @@
+/* ===============================
+DESKTOP DEFAULT
+=============================== */
 
-/* Tablet Styles */
-@media (max-width: 1024px){
+.menu-toggle{
+display:none;
+}
+
+
+/* ===============================
+TABLET
+=============================== */
+
+@media (max-width:1200px){
 
 .hero h1{
 font-size:48px;
@@ -16,7 +27,11 @@ grid-template-columns:repeat(2,1fr);
 
 }
 
-/* Mobile Styles */
+
+/* ===============================
+MOBILE
+=============================== */
+
 @media (max-width:768px){
 
 .navbar{
@@ -30,10 +45,12 @@ color:white;
 cursor:pointer;
 }
 
+/* Mobile menu */
+
 .nav-links{
 
 position:absolute;
-top:60px;
+top:70px;
 left:0;
 
 width:100%;
@@ -56,6 +73,12 @@ display:flex;
 margin-bottom:15px;
 }
 
+/* Hero */
+
+.hero{
+padding-top:100px;
+}
+
 .hero h1{
 font-size:36px;
 }
@@ -63,6 +86,8 @@ font-size:36px;
 .subtitle{
 font-size:16px;
 }
+
+/* Grid layouts */
 
 .projects-grid{
 grid-template-columns:1fr;
@@ -75,6 +100,8 @@ grid-template-columns:1fr;
 .devops-grid{
 grid-template-columns:1fr;
 }
+
+/* Command palette */
 
 #command-palette{
 width:90%;

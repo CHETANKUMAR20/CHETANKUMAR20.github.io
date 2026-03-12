@@ -1,17 +1,36 @@
+document.addEventListener("DOMContentLoaded", () => {
+
+/* =========================
+BOOT SCREEN
+========================= */
+
 setTimeout(() => {
 
-document.getElementById("boot-screen").style.display = "none"
+const boot = document.getElementById("boot-screen")
+
+boot.style.opacity = "0"
+
+setTimeout(() => {
+boot.style.display = "none"
+},800)
 
 document.getElementById("portfolio").classList.remove("hidden")
 
 document.body.style.overflow = "auto"
 
-}, 5000)
+},5000)
+
+
+/* =========================
+TERMINAL
+========================= */
 
 const terminalInput = document.getElementById("terminal-input")
 const terminalOutput = document.getElementById("terminal-output")
 
-terminalInput.addEventListener("keydown", function(e){
+if(terminalInput){
+
+terminalInput.addEventListener("keydown",(e)=>{
 
 if(e.key === "Enter"){
 
@@ -21,19 +40,23 @@ printOutput("visitor@chetan:~$ " + command)
 
 handleCommand(command)
 
-terminalInput.value = ""
+terminalInput.value=""
 
 }
 
 })
 
+}
+
 function printOutput(text){
 
 const line = document.createElement("div")
 
-line.textContent = text
+line.textContent=text
 
 terminalOutput.appendChild(line)
+
+terminalOutput.scrollTop = terminalOutput.scrollHeight
 
 }
 
@@ -73,7 +96,7 @@ printOutput("Email: chetan@example.com")
 break
 
 case "clear":
-terminalOutput.innerHTML = ""
+terminalOutput.innerHTML=""
 break
 
 default:
@@ -82,23 +105,30 @@ printOutput("Command not found. Type 'help'")
 
 }
 
+
+/* =========================
+GITHUB PROJECTS
+========================= */
+
 async function loadGithubProjects(){
 
-const container = document.getElementById("projects-container")
+try{
 
-const response = await fetch("https://api.github.com/users/CHETANKUMAR20/repos")
+const container=document.getElementById("projects-container")
 
-const repos = await response.json()
+const response=await fetch("https://api.github.com/users/CHETANKUMAR20/repos")
 
-container.innerHTML = ""
+const repos=await response.json()
 
-repos.slice(0,6).forEach(repo => {
+container.innerHTML=""
 
-const card = document.createElement("div")
+repos.slice(0,6).forEach(repo=>{
 
-card.className = "project-card"
+const card=document.createElement("div")
 
-card.innerHTML = `
+card.className="project-card reveal"
+
+card.innerHTML=`
 <h3>${repo.name}</h3>
 <p>${repo.description || "No description available"}</p>
 <a href="${repo.html_url}" target="_blank">View Repository</a>
@@ -108,110 +138,138 @@ container.appendChild(card)
 
 })
 
+}catch(error){
+
+console.error("GitHub API error:",error)
+
+}
+
 }
 
 loadGithubProjects()
 
 
+/* =========================
+GITHUB STATS
+========================= */
+
 async function loadGithubStats(){
 
-const response = await fetch("https://api.github.com/users/CHETANKUMAR20")
+try{
 
-const data = await response.json()
+const response=await fetch("https://api.github.com/users/CHETANKUMAR20")
 
-document.getElementById("repo-count").textContent = data.public_repos
+const data=await response.json()
 
-document.getElementById("followers-count").textContent = data.followers
+document.getElementById("repo-count").textContent=data.public_repos
+document.getElementById("followers-count").textContent=data.followers
+document.getElementById("following-count").textContent=data.following
 
-document.getElementById("following-count").textContent = data.following
-
-document.getElementById("account-created").textContent =
+document.getElementById("account-created").textContent=
 new Date(data.created_at).getFullYear()
+
+}catch(err){
+
+console.error("GitHub stats error:",err)
+
+}
 
 }
 
 loadGithubStats()
 
-const photos = document.querySelectorAll(".photo-grid img")
-const lightbox = document.getElementById("lightbox")
-const lightboxImg = document.getElementById("lightbox-img")
 
-photos.forEach(photo => {
+/* =========================
+PHOTOGRAPHY LIGHTBOX
+========================= */
 
-photo.addEventListener("click", () => {
+const photos=document.querySelectorAll(".photo-grid img")
+const lightbox=document.getElementById("lightbox")
+const lightboxImg=document.getElementById("lightbox-img")
 
-lightbox.style.display = "flex"
-lightboxImg.src = photo.src
+photos.forEach(photo=>{
 
-})
+photo.addEventListener("click",()=>{
 
-})
-
-lightbox.addEventListener("click", () => {
-
-lightbox.style.display = "none"
+lightbox.style.display="flex"
+lightboxImg.src=photo.src
 
 })
 
-particlesJS("particles-js", {
+})
 
-particles: {
-number: { value: 80 },
+lightbox.addEventListener("click",()=>{
 
-color: { value: "#38bdf8" },
+lightbox.style.display="none"
 
-shape: { type: "circle" },
+})
 
-opacity: { value: 0.5 },
 
-size: { value: 3 },
+/* =========================
+PARTICLES BACKGROUND
+========================= */
 
-line_linked: {
-enable: true,
-distance: 150,
-color: "#38bdf8",
-opacity: 0.4,
-width: 1
+if(window.particlesJS){
+
+particlesJS("particles-js",{
+
+particles:{
+number:{value:80},
+color:{value:"#38bdf8"},
+shape:{type:"circle"},
+opacity:{value:0.5},
+size:{value:3},
+
+line_linked:{
+enable:true,
+distance:150,
+color:"#38bdf8",
+opacity:0.4,
+width:1
 },
 
-move: {
-enable: true,
-speed: 2
+move:{
+enable:true,
+speed:2
 }
 },
 
-interactivity: {
-
-events: {
-onhover: {
-enable: true,
-mode: "grab"
+interactivity:{
+events:{
+onhover:{
+enable:true,
+mode:"grab"
 }
 },
 
-modes: {
-grab: {
-distance: 140,
-line_linked: {
-opacity: 1
-}
+modes:{
+grab:{
+distance:140,
+line_linked:{opacity:1}
 }
 }
 
 }
 
-});
+})
 
-const palette = document.getElementById("command-palette")
-const commandInput = document.getElementById("command-input")
+}
 
-document.addEventListener("keydown", (e) => {
 
-if (e.ctrlKey && e.key === "k") {
+/* =========================
+COMMAND PALETTE
+========================= */
+
+const palette=document.getElementById("command-palette")
+const commandInput=document.getElementById("command-input")
+
+document.addEventListener("keydown",(e)=>{
+
+if(e.ctrlKey && e.key==="k"){
 
 e.preventDefault()
 
-palette.style.display = "block"
+palette.style.display="block"
 
 commandInput.focus()
 
@@ -219,14 +277,14 @@ commandInput.focus()
 
 })
 
-document.addEventListener("click", (e) => {
+document.addEventListener("click",(e)=>{
 
 if(e.target.dataset.target){
 
 document.querySelector(e.target.dataset.target)
 .scrollIntoView({behavior:"smooth"})
 
-palette.style.display = "none"
+palette.style.display="none"
 
 }
 
@@ -234,28 +292,53 @@ if(e.target.dataset.link){
 
 window.open(e.target.dataset.link)
 
-palette.style.display = "none"
+palette.style.display="none"
 
 }
 
 })
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown",(e)=>{
 
-if(e.key === "Escape"){
-
-palette.style.display = "none"
-
+if(e.key==="Escape"){
+palette.style.display="none"
 }
 
 })
 
-/* Mobile Menu JS*/
-const menuToggle = document.getElementById("menuToggle")
-const navLinks = document.getElementById("navLinks")
 
-menuToggle.addEventListener("click", () => {
+/* =========================
+MOBILE MENU
+========================= */
+
+const menuToggle=document.getElementById("menuToggle")
+const navLinks=document.getElementById("navLinks")
+
+menuToggle.addEventListener("click",()=>{
 
 navLinks.classList.toggle("active")
+
+})
+
+
+/* =========================
+SCROLL REVEAL
+========================= */
+
+const reveals=document.querySelectorAll(".reveal")
+
+const observer=new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+entry.target.classList.add("active")
+}
+
+})
+
+},{threshold:0.2})
+
+reveals.forEach(el=>observer.observe(el))
 
 })
