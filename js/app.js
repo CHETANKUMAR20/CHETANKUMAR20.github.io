@@ -201,3 +201,51 @@ opacity: 1
 }
 
 });
+
+const palette = document.getElementById("command-palette")
+const commandInput = document.getElementById("command-input")
+
+document.addEventListener("keydown", (e) => {
+
+if (e.ctrlKey && e.key === "k") {
+
+e.preventDefault()
+
+palette.style.display = "block"
+
+commandInput.focus()
+
+}
+
+})
+
+document.addEventListener("click", (e) => {
+
+if(e.target.dataset.target){
+
+document.querySelector(e.target.dataset.target)
+.scrollIntoView({behavior:"smooth"})
+
+palette.style.display = "none"
+
+}
+
+if(e.target.dataset.link){
+
+window.open(e.target.dataset.link)
+
+palette.style.display = "none"
+
+}
+
+})
+
+document.addEventListener("keydown", (e) => {
+
+if(e.key === "Escape"){
+
+palette.style.display = "none"
+
+}
+
+})
