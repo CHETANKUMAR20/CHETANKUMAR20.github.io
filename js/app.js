@@ -112,21 +112,27 @@ async function loadGithubProjects() {
 const container = document.getElementById("projects-container")
 
 if (!container) {
-console.error("projects-container not found")
+console.error("Projects container not found")
 return
 }
 
+console.log("Loading GitHub projects...")
+
 try {
 
-const response = await fetch("https://api.github.com/users/CHETANKUMAR20/repos")
+const response = await fetch(
+"https://api.github.com/users/CHETANKUMAR20/repos"
+)
 
 const repos = await response.json()
 
-console.log("Repos:", repos)
+console.log("Total repos:", repos.length)
 
-const myProjects = repos.filter(repo => repo.fork === false)
+const myProjects = repos.filter(repo => !repo.fork)
 
-container.innerHTML = "TEST SUCCESS"
+console.log("My projects:", myProjects.length)
+
+container.innerHTML = ""
 
 myProjects.slice(0,6).forEach(repo => {
 
@@ -137,7 +143,16 @@ card.className = "project-card"
 card.innerHTML = `
 <h3>${repo.name}</h3>
 <p>${repo.description || "No description available"}</p>
-<a href="${repo.html_url}" target="_blank">View Repository</a>
+
+<div class="repo-meta">
+<span>⭐ ${repo.stargazers_count}</span>
+<span>🍴 ${repo.forks_count}</span>
+<span>${repo.language || "Code"}</span>
+</div>
+
+<a href="${repo.html_url}" target="_blank">
+View Repository
+</a>
 `
 
 container.appendChild(card)

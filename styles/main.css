@@ -466,3 +466,48 @@ img{
 max-width:100%;
 height:auto;
 }
+
+/* skeleton loading */
+
+.skeleton-card{
+
+height:140px;
+border-radius:10px;
+
+background:linear-gradient(
+90deg,
+#0f172a 25%,
+#1e293b 50%,
+#0f172a 75%
+);
+
+background-size:200% 100%;
+
+animation:skeleton-loading 1.2s infinite;
+
+}
+
+@keyframes skeleton-loading{
+
+0%{
+background-position:200% 0;
+}
+
+100%{
+background-position:-200% 0;
+}
+
+}
+
+.repo-meta{
+
+display:flex;
+gap:15px;
+
+font-size:13px;
+
+opacity:0.8;
+
+margin-bottom:10px;
+
+}
