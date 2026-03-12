@@ -455,3 +455,66 @@ container.innerHTML = "Unable to load activity."
 }
 
 window.addEventListener("load", loadGithubActivity)
+
+async function loadDevOpsStatus(){
+
+try{
+
+const reposRes = await fetch(
+"https://api.github.com/users/CHETANKUMAR20/repos"
+)
+
+const repos = await reposRes.json()
+
+const myProjects = repos.filter(r => !r.fork)
+
+document.getElementById("active-projects").textContent =
+myProjects.length
+
+
+const sorted = myProjects.sort((a,b)=>
+new Date(b.updated_at) - new Date(a.updated_at)
+)
+
+const latestRepo = sorted[0]
+
+document.getElementById("latest-update").textContent =
+latestRepo.name.replace("CHETANKUMAR20/","")
+
+
+const eventsRes = await fetch(
+"https://api.github.com/users/CHETANKUMAR20/events"
+)
+
+const events = await eventsRes.json()
+
+const today = new Date().toDateString()
+
+let commitCount = 0
+
+events.forEach(e => {
+
+if(e.type === "PushEvent"){
+
+const eventDate = new Date(e.created_at).toDateString()
+
+if(eventDate === today){
+commitCount++
+}
+
+}
+
+})
+
+document.getElementById("commits-today").textContent =
+commitCount
+
+}catch(err){
+
+console.error("DevOps status error", err)
+
+}
+
+}
+
+window.addEventListener("load", loadDevOpsStatus)

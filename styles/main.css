@@ -268,6 +268,18 @@ text-align:center;
 color:white;
 }
 
+.devops-section h2,
+.devops-status h2 {
+text-align: center;
+margin-bottom: 40px;
+letter-spacing: 1px;
+}
+
+.devops-section,
+.devops-status {
+padding: 80px 20px;
+}
+
 .devops-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -592,4 +604,65 @@ width:10px;
 height:10px;
 border-radius:50%;
 display:inline-block;
+}
+
+.devops-status{
+padding:80px 20px;
+background:#020617;
+text-align:center;
+color:white;
+}
+
+.status-grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+gap: 25px;
+
+max-width: 900px;
+
+margin: auto;
+
+align-items: stretch;
+
+}
+
+.status-card {
+
+display: flex;
+
+flex-direction: column;
+
+justify-content: center;
+
+align-items: center;
+
+text-align: center;
+
+background: #0f172a;
+
+padding: 25px;
+
+border-radius: 10px;
+
+border: 1px solid #1e293b;
+
+transition: 0.3s;
+
+}
+
+.status-card:hover{
+transform:translateY(-6px);
+border-color:#38bdf8;
+}
+
+.status-card p {
+font-size: 20px;
+color: #38bdf8;
+
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 }
